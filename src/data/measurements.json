@@ -1,0 +1,14 @@
+[
+  {"component":"Frame","dimension":"Head tube angle","value":"73.5","unit":"deg","source":"official drawing","confirmed":true},
+  {"component":"Frame","dimension":"Seat tube angle","value":"86","unit":"deg","source":"official drawing","confirmed":true},
+  {"component":"Frame","dimension":"Seat tube length","value":"539","unit":"mm","source":"official drawing","confirmed":true},
+  {"component":"Frame","dimension":"Top tube (effective)","value":"607","unit":"mm","source":"official drawing","confirmed":true},
+  {"component":"Cargo","dimension":"Cargo rail length","value":"824","unit":"mm","source":"official drawing","confirmed":true},
+  {"component":"Cargo","dimension":"Cargo deck length","value":"710","unit":"mm","source":"official drawing","confirmed":true},
+  {"component":"Cargo","dimension":"Cargo height (deck to rail top)","value":"466","unit":"mm","source":"official drawing","confirmed":true},
+  {"component":"Handlebar","dimension":"Handlebar width","value":"590","unit":"mm","source":"official drawing","confirmed":true},
+  {"component":"Brakes","dimension":"Rear disc diameter","value":"160","unit":"mm","source":"official drawing","confirmed":true},
+  {"component":"Frame","dimension":"Wheelbase","value":"?","unit":"mm","source":"unconfirmed","confirmed":false},
+  {"component":"Frame","dimension":"Chainstay length","value":"?","unit":"mm","source":"unconfirmed","confirmed":false},
+  {"component":"Cargo","dimension":"Cargo inner length","value":"?","unit":"mm","source":"unconfirmed","confirmed":false}
+]

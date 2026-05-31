@@ -1,0 +1,64 @@
+---
+import Base from '../layouts/Base.astro';
+import measurements from '../data/measurements.json';
+
+const confirmed = measurements.filter(m => m.confirmed);
+const unconfirmed = measurements.filter(m => !m.confirmed);
+
+const components = [...new Set(measurements.map(m => m.component))];
+---
+<Base title="Measurements" description="Official Bullitt cargo bike dimensions — 50+ measurements from technical drawings.">
+  <style>
+    .dl-row { display: flex; gap: 1rem; flex-wrap: wrap; margin: 1.5rem 0 2.5rem; }
+    .btn { display: inline-block; padding: 0.55rem 1.2rem; border: 2px solid #0d0d0d; text-decoration: none; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+    .btn:hover { background: #0d0d0d; color: #f5f5f5; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.875rem; margin-bottom: 2rem; }
+    th { text-align: left; padding: 0.5rem 0.75rem; border-bottom: 2px solid #0d0d0d; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    td { padding: 0.5rem 0.75rem; border-bottom: 1px solid #e8e8e8; }
+    tr:hover td { background: #f0f0f0; }
+    .tag { display: inline-block; font-size: 0.7rem; padding: 1px 6px; border: 1px solid; border-radius: 2px; margin-left: 4px; }
+    .tag.confirmed { border-color: #2a9d2a; color: #2a9d2a; }
+    .tag.pending { border-color: #aaa; color: #aaa; }
+    .note { background: #fff8e1; border-left: 3px solid #f0c040; padding: 0.75rem 1rem; font-size: 0.85rem; margin-bottom: 2rem; }
+    .section-head { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #888; padding: 1rem 0.75rem 0.3rem; }
+  </style>
+
+  <h1>Measurements</h1>
+  <p class="subtitle">Dimensions from official Larry vs Harry technical drawings. Unconfirmed values are marked.</p>
+
+  <div class="dl-row">
+    <a href="/downloads/measurements.csv" class="btn" download>Download CSV</a>
+    <a href="/downloads/bullitt-side-view.svg" class="btn" download>Side View Drawing (SVG)</a>
+  </div>
+
+  <div class="note">
+    <strong>Note:</strong> Some dimensions (wheelbase, chainstay, cargo inner length) remain unconfirmed — marked below. 
+    Physical measurement or dealer inquiry needed. Contributions welcome via GitHub.
+  </div>
+
+  {components.map(comp => (
+    <div>
+      <div class="section-head">{comp}</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Dimension</th>
+            <th>Value</th>
+            <th>Unit</th>
+            <th>Source</th>
+          </tr>
+        </thead>
+        <tbody>
+          {measurements.filter(m => m.component === comp).map(m => (
+            <tr>
+              <td>{m.dimension}</td>
+              <td><strong>{m.value}</strong><span class:list={['tag', m.confirmed ? 'confirmed' : 'pending']}>{m.confirmed ? '✓' : '?'}</span></td>
+              <td>{m.unit}</td>
+              <td style="color:#888;font-size:0.8rem">{m.source}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  ))}
+</Base>

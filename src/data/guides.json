@@ -1,0 +1,23 @@
+[
+  {
+    "id": "01",
+    "title": "Routine Maintenance Checklist",
+    "slug": "routine-maintenance",
+    "description": "Keep your Bullitt running smoothly with this monthly and seasonal maintenance guide.",
+    "tags": ["maintenance","beginner"]
+  },
+  {
+    "id": "02",
+    "title": "Brakes & Drivetrain Upgrades",
+    "slug": "brakes-drivetrain-upgrades",
+    "description": "Step-by-step guide to upgrading hydraulic brakes and drivetrain components.",
+    "tags": ["upgrades","intermediate"]
+  },
+  {
+    "id": "03",
+    "title": "Safe Cargo Attachment",
+    "slug": "safe-cargo-attachment",
+    "description": "Best practices for securing loads on the cargo deck — straps, boxes, child seats.",
+    "tags": ["cargo","safety","beginner"]
+  }
+]

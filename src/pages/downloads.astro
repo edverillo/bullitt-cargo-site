@@ -1,0 +1,47 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Downloads">
+  <style>
+    .dl-list { display: flex; flex-direction: column; gap: 0; margin-top: 1.5rem; }
+    .dl-item { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: center; padding: 1.1rem 0; border-bottom: 1px solid #e8e8e8; }
+    .dl-item h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.2rem; }
+    .dl-item p { font-size: 0.8rem; color: #666; margin: 0; }
+    .badge { display: inline-block; font-size: 0.7rem; padding: 2px 6px; background: #0d0d0d; color: #f5f5f5; margin-right: 4px; border-radius: 2px; }
+    .btn { display: inline-block; padding: 0.5rem 1rem; border: 2px solid #0d0d0d; text-decoration: none; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; }
+    .btn:hover { background: #0d0d0d; color: #f5f5f5; }
+  </style>
+  <h1>Downloads</h1>
+  <p class="subtitle">Technical drawings, measurement data, and 3D model files.</p>
+
+  <div class="dl-list">
+    <div class="dl-item">
+      <div>
+        <h3>Measurements — CSV</h3>
+        <p><span class="badge">CSV</span> 50+ confirmed dimensions. Import into any spreadsheet or CAD tool.</p>
+      </div>
+      <a href="/downloads/measurements.csv" class="btn" download>Download</a>
+    </div>
+    <div class="dl-item">
+      <div>
+        <h3>Side View Drawing</h3>
+        <p><span class="badge">SVG</span> Dimensioned side elevation from official technical drawings.</p>
+      </div>
+      <a href="/downloads/bullitt-side-view.svg" class="btn" download>Download</a>
+    </div>
+    <div class="dl-item">
+      <div>
+        <h3>Gallery Metadata</h3>
+        <p><span class="badge">JSON</span> 12 CC-licensed images with full attribution, alt text, and source URLs.</p>
+      </div>
+      <a href="/downloads/gallery-metadata.json" class="btn" download>Download</a>
+    </div>
+    <div class="dl-item">
+      <div>
+        <h3>3D Model — GLB</h3>
+        <p><span class="badge">GLB</span> 63 KB procedural model with 3 material slots (Frame, CargoDeck, Accents).</p>
+      </div>
+      <a href="/assets/3d/bullitt-cargo.glb" class="btn" download>Download</a>
+    </div>
+  </div>
+</Base>

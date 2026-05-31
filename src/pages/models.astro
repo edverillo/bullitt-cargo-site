@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import variants from '../data/model_variants.json';
+---
+<Base title="Model Variants" description="Bullitt cargo bike model comparison — Original, Shorty, Classic-E, Black Edition.">
+  <style>
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+    .card { border: 1px solid #ddd; padding: 1.5rem; }
+    .card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .card dl { display: grid; grid-template-columns: auto 1fr; gap: 0.25rem 0.75rem; font-size: 0.85rem; }
+    dt { font-weight: 600; color: #555; white-space: nowrap; }
+    dd { color: #0d0d0d; }
+    .note-row { margin-top: 0.75rem; font-size: 0.8rem; color: #666; border-top: 1px solid #eee; padding-top: 0.75rem; }
+    .year-badge { font-size: 0.75rem; font-weight: 700; background: #0d0d0d; color: #f5f5f5; padding: 2px 7px; display: inline-block; margin-bottom: 0.5rem; }
+  </style>
+
+  <h1>Model Variants</h1>
+  <p class="subtitle">Five configurations from the Larry vs Harry lineup, from the original long-john to the electric-assist Classic-E.</p>
+
+  <div class="grid">
+    {variants.map(v => (
+      <div class="card">
+        <div class="year-badge">{v.year_from}{v.year_to ? `–${v.year_to}` : '–'}</div>
+        <h3>{v.name}</h3>
+        <dl>
+          <dt>Frame</dt><dd>{v.frame_material}</dd>
+          <dt>Gears</dt><dd>{v.gears}</dd>
+          <dt>Brakes</dt><dd>{v.brakes}</dd>
+          <dt>Max cargo</dt><dd>{v.cargo_capacity_kg} kg</dd>
+        </dl>
+        <p class="note-row">{v.notes}</p>
+      </div>
+    ))}
+  </div>
+</Base>

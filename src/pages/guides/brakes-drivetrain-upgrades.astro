@@ -1,0 +1,58 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base title="Brakes & Drivetrain Upgrades">
+  <style>
+    article { max-width: 72ch; }
+    .meta { color: #888; font-size: 0.85rem; margin-bottom: 2rem; }
+    .tag { display: inline-block; font-size: 0.7rem; padding: 1px 7px; border: 1px solid #ccc; border-radius: 2px; margin-right: 4px; }
+    h2 { margin: 2rem 0 0.75rem; font-size: 1.1rem; }
+    ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+    li { margin-bottom: 0.4rem; line-height: 1.55; font-size: 0.9rem; }
+    .tools-box { background: #f5f5f5; border: 1px solid #ddd; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+    .tools-box h3 { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+    .safety-note { background: #fff3e0; border-left: 3px solid #f0a000; padding: 0.75rem 1rem; font-size: 0.85rem; margin: 1.5rem 0; }
+    a.back { font-size: 0.8rem; display: inline-block; margin-bottom: 1.5rem; }
+  </style>
+  <article>
+    <a href="/guides" class="back">← All guides</a>
+    <h1>Brakes &amp; Drivetrain Upgrades</h1>
+    <p class="meta"><span class="tag">upgrades</span><span class="tag">intermediate</span></p>
+
+    <p>The Bullitt accepts a wide range of hydraulic brake and drivetrain upgrades. This guide covers the most common upgrade paths and installation steps.</p>
+
+    <div class="tools-box">
+      <h3>Tools needed</h3>
+      <ul>
+        <li>Hydraulic brake bleed kit (specific to your brake brand)</li>
+        <li>Mineral oil or DOT fluid (match to your brake)</li>
+        <li>Torque wrench</li>
+        <li>Chain tool</li>
+        <li>Cassette lockring tool + chain whip</li>
+        <li>Bottom bracket tool (if upgrading BB)</li>
+      </ul>
+    </div>
+
+    <h2>Hydraulic brake upgrade</h2>
+    <ol>
+      <li>Choose compatible levers and calipers. The Bullitt uses flat-mount calipers front and rear (160 mm rotors rear, 180 mm front recommended for heavy loads).</li>
+      <li>Remove old levers: disconnect cable or hose at caliper end first, then remove from bar clamp.</li>
+      <li>Install new levers at desired angle (typically 30–45° below horizontal). Torque clamp bolt to manufacturer spec (usually 5–6 Nm).</li>
+      <li>Bleed the system: follow your specific brake's bleed procedure. Shimano, SRAM, and TRP each have different procedures and fluids.</li>
+      <li>Bed-in pads: 20 progressive stops from ~20 km/h on a flat surface before riding loaded.</li>
+    </ol>
+
+    <h2>Drivetrain upgrade (1x conversion)</h2>
+    <ol>
+      <li>Select a 1x chainring (oval or round) with a narrow-wide tooth profile to prevent chain drop.</li>
+      <li>Choose a rear derailleur with a long cage (GS or SGS) to handle cassette range (11-46T or similar).</li>
+      <li>Install a chain guide or bash guard on the chainring for additional security when cargo is loaded.</li>
+      <li>Size chain correctly: add 2 links to the measurement for the largest-largest combination.</li>
+      <li>Adjust limit screws and cable tension per derailleur instructions. Test through all gears under light load before riding heavily loaded.</li>
+    </ol>
+
+    <div class="safety-note">
+      <strong>Safety:</strong> Always test brake performance before riding with passengers or heavy cargo. Hydraulic brake work should only be performed if you are confident in the procedure — take to a qualified mechanic if unsure.
+    </div>
+  </article>
+</Base>

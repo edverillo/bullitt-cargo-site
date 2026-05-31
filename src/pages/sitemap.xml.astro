@@ -1,0 +1,15 @@
+---
+import { getCollection } from 'astro:content';
+const base = 'https://bullitt.pages.dev';
+const pages = ['', '/measurements', '/models', '/customiser', '/gallery', '/guides', '/downloads',
+  '/guides/routine-maintenance', '/guides/brakes-drivetrain-upgrades', '/guides/safe-cargo-attachment'];
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {pages.map(p => (
+    <url>
+      <loc>{base}{p}</loc>
+      <changefreq>monthly</changefreq>
+    </url>
+  ))}
+</urlset>

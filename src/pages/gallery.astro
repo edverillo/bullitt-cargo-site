@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import gallery from '../data/gallery.json';
+---
+<Base title="Gallery" description="CC-licensed Bullitt cargo bike photos with full attribution.">
+  <style>
+    .filter-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 1rem 0 1.5rem; }
+    .filter-btn { padding: 0.35rem 0.9rem; border: 1px solid #ccc; background: none; font-size: 0.8rem; cursor: pointer; border-radius: 2px; }
+    .filter-btn.active, .filter-btn:hover { background: #0d0d0d; color: #f5f5f5; border-color: #0d0d0d; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
+    .gallery-item { border: 1px solid #ddd; overflow: hidden; }
+    .img-placeholder { background: #e8e8e8; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; color: #aaa; font-size: 0.8rem; text-align: center; padding: 1rem; }
+    .gallery-caption { padding: 0.75rem; }
+    .gallery-caption p { font-size: 0.8rem; margin-bottom: 0.4rem; }
+    .license-badge { font-size: 0.7rem; color: #888; }
+    .attribution { font-size: 0.72rem; color: #555; }
+    .source-link { font-size: 0.72rem; }
+  </style>
+
+  <h1>Gallery</h1>
+  <p class="subtitle">CC-licensed photos of Bullitt bikes in the wild. All images include photographer credit and license.</p>
+
+  <div class="gallery-grid">
+    {gallery.map(img => (
+      <article class="gallery-item">
+        <div class="img-placeholder" role="img" aria-label={img.alt}>
+          {img.alt}
+        </div>
+        <div class="gallery-caption">
+          <p><strong>{img.title}</strong></p>
+          <p class="attribution">Photo: {img.photographer}</p>
+          <p class="license-badge">{img.license}</p>
+          <a href={img.source_url} class="source-link" target="_blank" rel="noopener">View source ↗</a>
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <p style="margin-top:2rem;font-size:0.8rem;color:#888">
+    Images are sourced from Wikimedia Commons. Actual image files require downloading — see <a href="/downloads">Downloads</a> for the metadata JSON and optimization script.
+  </p>
+</Base>

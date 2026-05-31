@@ -1,0 +1,282 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="3D Customiser" description="Interactive 3D Bullitt cargo bike customiser. Change frame, deck, and accent colours. Share via URL.">
+  <style>
+    .customiser-wrap { display: grid; grid-template-columns: 1fr 280px; gap: 1.5rem; margin-top: 1.5rem; }
+    @media (max-width: 780px) { .customiser-wrap { grid-template-columns: 1fr; } }
+    #viewer-container {
+      border: 1px solid #ddd;
+      aspect-ratio: 16/9;
+      min-height: 320px;
+      background: #1a1a1a;
+      position: relative;
+      overflow: hidden;
+    }
+    #viewer-container canvas { width: 100% !important; height: 100% !important; display: block; }
+    .loading-msg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #aaa; font-size: 0.875rem; pointer-events: none; }
+    .controls { background: #f9f9f9; border: 1px solid #ddd; padding: 1.5rem; }
+    .controls h2 { font-size: 1rem; font-weight: 700; margin-bottom: 1.25rem; }
+    .slot { margin-bottom: 1.5rem; }
+    .slot label { display: block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.6rem; }
+    .swatches { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 0.5rem; }
+    .swatch { width: 28px; height: 28px; border: 2px solid transparent; cursor: pointer; border-radius: 2px; transition: 0.1s; }
+    .swatch:hover, .swatch.active { border-color: #0d0d0d; }
+    .swatch:focus-visible { outline: 2px solid #e63c2f; outline-offset: 2px; }
+    .hex-row { display: flex; gap: 6px; align-items: center; }
+    .hex-input { flex: 1; padding: 0.35rem 0.5rem; border: 1px solid #ccc; font-size: 0.8rem; font-family: monospace; }
+    .hex-preview { width: 28px; height: 28px; border: 1px solid #ccc; flex-shrink: 0; }
+    .btn-row { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1.5rem; }
+    .btn { display: block; width: 100%; text-align: center; padding: 0.6rem 1rem; border: 2px solid #0d0d0d; background: none; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; cursor: pointer; }
+    .btn:hover { background: #0d0d0d; color: #f5f5f5; }
+    .btn.primary { background: #0d0d0d; color: #f5f5f5; }
+    .btn.primary:hover { background: #333; border-color: #333; }
+    .cam-row { display: flex; gap: 6px; margin-bottom: 1.5rem; }
+    .cam-btn { flex: 1; padding: 0.35rem; border: 1px solid #ccc; background: none; font-size: 0.7rem; cursor: pointer; text-transform: uppercase; letter-spacing: 0.04em; }
+    .cam-btn:hover, .cam-btn.active { background: #0d0d0d; color: #f5f5f5; border-color: #0d0d0d; }
+    .share-url { margin-top: 1rem; padding: 0.5rem; border: 1px solid #ddd; font-size: 0.72rem; font-family: monospace; word-break: break-all; background: #fff; display: none; }
+    .notice { font-size: 0.75rem; color: #888; margin-top: 0.5rem; }
+  </style>
+
+  <h1>3D Customiser</h1>
+  <p class="subtitle">Choose colours for each material slot. Your configuration is saved in the URL — bookmark or share it.</p>
+
+  <div class="customiser-wrap">
+    <div id="viewer-container" aria-label="3D viewer — interactive Bullitt model">
+      <div class="loading-msg" id="loading-msg">Loading 3D model…</div>
+    </div>
+
+    <div class="controls">
+      <h2>Colour customiser</h2>
+
+      <div class="cam-row">
+        <button class="cam-btn active" data-cam="side">Side</button>
+        <button class="cam-btn" data-cam="three-quarter">3/4</button>
+        <button class="cam-btn" data-cam="top">Top</button>
+      </div>
+
+      <div class="slot" data-slot="Frame">
+        <label for="hex-Frame">Frame colour</label>
+        <div class="swatches" id="swatches-Frame"></div>
+        <div class="hex-row">
+          <input class="hex-input" id="hex-Frame" type="text" maxlength="7" placeholder="#1a1a2e" aria-label="Frame hex colour" />
+          <div class="hex-preview" id="preview-Frame"></div>
+        </div>
+      </div>
+
+      <div class="slot" data-slot="CargoDeck">
+        <label for="hex-CargoDeck">Cargo deck colour</label>
+        <div class="swatches" id="swatches-CargoDeck"></div>
+        <div class="hex-row">
+          <input class="hex-input" id="hex-CargoDeck" type="text" maxlength="7" placeholder="#c8a96e" aria-label="CargoDeck hex colour" />
+          <div class="hex-preview" id="preview-CargoDeck"></div>
+        </div>
+      </div>
+
+      <div class="slot" data-slot="Accents">
+        <label for="hex-Accents">Accents colour</label>
+        <div class="swatches" id="swatches-Accents"></div>
+        <div class="hex-row">
+          <input class="hex-input" id="hex-Accents" type="text" maxlength="7" placeholder="#e63c2f" aria-label="Accents hex colour" />
+          <div class="hex-preview" id="preview-Accents"></div>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn primary" id="btn-share">Copy share URL</button>
+        <button class="btn" id="btn-export">Export JSON</button>
+        <button class="btn" id="btn-reset">Reset defaults</button>
+      </div>
+      <div class="share-url" id="share-url"></div>
+      <p class="notice">Colours are encoded in the URL. Bookmark or share the link to save your config.</p>
+    </div>
+  </div>
+
+  <!-- three.js r165 + GLTFLoader via CDN -->
+  <script type="module">
+    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js';
+    import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/controls/OrbitControls.js';
+    import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/loaders/GLTFLoader.js';
+
+    const SLOTS = ['Frame', 'CargoDeck', 'Accents'];
+    const PRESETS = {
+      Frame: ['#1a1a2e','#2e4a1e','#c0392b','#1565c0','#4a4a4a','#f5f5f5','#8b6914','#2d2d2d'],
+      CargoDeck: ['#c8a96e','#e8dcc8','#5c3d1e','#a0a0a0','#4a7c4e','#d4c5a9','#8b7355','#f0e8d8'],
+      Accents: ['#e63c2f','#f0c040','#2e7d32','#1565c0','#9c27b0','#f5f5f5','#0d0d0d','#ff6f00'],
+    };
+    const DEFAULTS = { Frame: '#1a1a2e', CargoDeck: '#c8a96e', Accents: '#e63c2f' };
+    const CAMERAS = {
+      side: { x: 0, y: 0.8, z: 3.5 },
+      'three-quarter': { x: 2.2, y: 1.2, z: 2.8 },
+      top: { x: 0, y: 4, z: 0.5 },
+    };
+
+    // --- read URL params ---
+    const params = new URLSearchParams(location.search);
+    const state = {};
+    SLOTS.forEach(s => { state[s] = params.get(s) || DEFAULTS[s]; });
+
+    // --- scene setup ---
+    const container = document.getElementById('viewer-container');
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.2;
+    container.appendChild(renderer.domElement);
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x1a1a1a);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+    const dir = new THREE.DirectionalLight(0xffffff, 1.2);
+    dir.position.set(3, 5, 3);
+    scene.add(dir);
+    const fill = new THREE.DirectionalLight(0x8888ff, 0.3);
+    fill.position.set(-3, 2, -2);
+    scene.add(fill);
+
+    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.01, 100);
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.08;
+    controls.minDistance = 0.5;
+    controls.maxDistance = 10;
+
+    function setCamera(preset) {
+      const p = CAMERAS[preset];
+      camera.position.set(p.x, p.y, p.z);
+      controls.target.set(0, 0.5, 0);
+      controls.update();
+      document.querySelectorAll('.cam-btn').forEach(b => b.classList.toggle('active', b.dataset.cam === preset));
+    }
+    setCamera('side');
+
+    // --- resize ---
+    function onResize() {
+      const w = container.clientWidth, h = container.clientHeight;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    new ResizeObserver(onResize).observe(container);
+    onResize();
+
+    // --- material map ---
+    const meshMap = {};
+
+    // --- load GLB (procedurally generated, served from /assets/3d/) ---
+    const loader = new GLTFLoader();
+
+    function applyColor(slot, hex) {
+      if (!meshMap[slot]) return;
+      const color = new THREE.Color(hex);
+      meshMap[slot].forEach(m => {
+        if (m.material) { m.material = m.material.clone(); m.material.color.set(color); }
+      });
+    }
+
+    loader.load('/assets/3d/bullitt-cargo.glb', gltf => {
+      document.getElementById('loading-msg').style.display = 'none';
+      gltf.scene.traverse(obj => {
+        if (obj.isMesh) {
+          const name = obj.material?.name || '';
+          if (!meshMap[name]) meshMap[name] = [];
+          meshMap[name].push(obj);
+        }
+      });
+      scene.add(gltf.scene);
+      // apply initial state
+      SLOTS.forEach(s => applyColor(s, state[s]));
+    }, undefined, err => {
+      document.getElementById('loading-msg').textContent = 'Model file not found. Place bullitt-cargo.glb in /public/assets/3d/';
+    });
+
+    // --- render loop ---
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    // --- UI: swatches ---
+    SLOTS.forEach(slot => {
+      const container2 = document.getElementById(`swatches-${slot}`);
+      const hexInput = document.getElementById(`hex-${slot}`);
+      const preview = document.getElementById(`preview-${slot}`);
+
+      function setSlotColor(hex, fromSwatch) {
+        state[slot] = hex;
+        hexInput.value = hex;
+        preview.style.background = hex;
+        applyColor(slot, hex);
+        updateURL();
+        if (fromSwatch) {
+          container2.querySelectorAll('.swatch').forEach(s => s.classList.toggle('active', s.dataset.color === hex));
+        }
+      }
+
+      PRESETS[slot].forEach(color => {
+        const btn = document.createElement('button');
+        btn.className = 'swatch' + (state[slot] === color ? ' active' : '');
+        btn.dataset.color = color;
+        btn.style.background = color;
+        btn.setAttribute('aria-label', `Set ${slot} colour to ${color}`);
+        btn.addEventListener('click', () => setSlotColor(color, true));
+        container2.appendChild(btn);
+      });
+
+      hexInput.value = state[slot];
+      preview.style.background = state[slot];
+      hexInput.addEventListener('input', e => {
+        const v = e.target.value;
+        if (/^#[0-9a-fA-F]{6}$/.test(v)) setSlotColor(v, false);
+      });
+    });
+
+    // --- camera buttons ---
+    document.querySelectorAll('.cam-btn').forEach(btn => {
+      btn.addEventListener('click', () => setCamera(btn.dataset.cam));
+    });
+
+    // --- share URL ---
+    function updateURL() {
+      const p = new URLSearchParams();
+      SLOTS.forEach(s => p.set(s, state[s]));
+      const url = location.pathname + '?' + p.toString();
+      history.replaceState(null, '', url);
+    }
+
+    document.getElementById('btn-share').addEventListener('click', () => {
+      const url = location.href;
+      navigator.clipboard?.writeText(url).catch(() => {});
+      const el = document.getElementById('share-url');
+      el.textContent = url;
+      el.style.display = 'block';
+      document.getElementById('btn-share').textContent = 'Copied!';
+      setTimeout(() => { document.getElementById('btn-share').textContent = 'Copy share URL'; }, 2000);
+    });
+
+    document.getElementById('btn-export').addEventListener('click', () => {
+      const json = JSON.stringify({ colours: state, exported_at: new Date().toISOString() }, null, 2);
+      const a = document.createElement('a');
+      a.href = 'data:application/json,' + encodeURIComponent(json);
+      a.download = 'bullitt-colours.json';
+      a.click();
+    });
+
+    document.getElementById('btn-reset').addEventListener('click', () => {
+      SLOTS.forEach(slot => {
+        const hexInput = document.getElementById(`hex-${slot}`);
+        const preview = document.getElementById(`preview-${slot}`);
+        const container2 = document.getElementById(`swatches-${slot}`);
+        state[slot] = DEFAULTS[slot];
+        hexInput.value = DEFAULTS[slot];
+        preview.style.background = DEFAULTS[slot];
+        applyColor(slot, DEFAULTS[slot]);
+        container2.querySelectorAll('.swatch').forEach(s => s.classList.toggle('active', s.dataset.color === DEFAULTS[slot]));
+      });
+      updateURL();
+    });
+  </script>
+</Base>

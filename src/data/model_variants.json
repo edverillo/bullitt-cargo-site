@@ -1,0 +1,57 @@
+[
+  {
+    "id": "original",
+    "name": "Bullitt Original",
+    "year_from": 2009,
+    "year_to": null,
+    "frame_material": "Chromoly steel",
+    "gears": "Various (1 to 11-speed)",
+    "brakes": "Disc",
+    "cargo_capacity_kg": 100,
+    "notes": "The original long-john cargo bike. Flat deck. Accepts most cargo accessories."
+  },
+  {
+    "id": "shorty",
+    "name": "Bullitt Shorty",
+    "year_from": 2018,
+    "year_to": null,
+    "frame_material": "Chromoly steel",
+    "gears": "Various",
+    "brakes": "Disc",
+    "cargo_capacity_kg": 80,
+    "notes": "Shorter cargo section for urban agility. Slightly reduced cargo length."
+  },
+  {
+    "id": "classic-e",
+    "name": "Bullitt Classic-E",
+    "year_from": 2020,
+    "year_to": null,
+    "frame_material": "Chromoly steel",
+    "gears": "11-speed with Bosch mid-drive",
+    "brakes": "Hydraulic disc",
+    "cargo_capacity_kg": 100,
+    "notes": "Electric-assist variant with Bosch Performance Line motor."
+  },
+  {
+    "id": "black-edition",
+    "name": "Bullitt Black Edition",
+    "year_from": 2022,
+    "year_to": null,
+    "frame_material": "Chromoly steel",
+    "gears": "11-speed",
+    "brakes": "Hydraulic disc",
+    "cargo_capacity_kg": 100,
+    "notes": "All-black colourway. Same geometry as Original."
+  },
+  {
+    "id": "custom",
+    "name": "Bullitt Custom Build",
+    "year_from": 2009,
+    "year_to": null,
+    "frame_material": "Chromoly steel",
+    "gears": "Customer specified",
+    "brakes": "Customer specified",
+    "cargo_capacity_kg": 100,
+    "notes": "Bespoke builds via Larry vs Harry. Frame-only or full build."
+  }
+]

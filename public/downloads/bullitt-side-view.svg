@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" width="900" height="500" font-family="D-DIN, DIN, system-ui, sans-serif" font-size="12">
+  <!-- Bullitt cargo bike — schematic side elevation (indicative, not to scale) -->
+  <rect width="900" height="500" fill="#f5f5f5"/>
+
+  <!-- Ground line -->
+  <line x1="50" y1="430" x2="850" y2="430" stroke="#999" stroke-width="1" stroke-dasharray="4,4"/>
+  <text x="55" y="445" fill="#999" font-size="10">Ground</text>
+
+  <!-- Rear wheel -->
+  <circle cx="680" cy="390" r="70" fill="none" stroke="#0d0d0d" stroke-width="3"/>
+  <circle cx="680" cy="390" r="10" fill="#0d0d0d"/>
+  <text x="680" y="490" text-anchor="middle" fill="#555" font-size="10">Rear wheel</text>
+
+  <!-- Front wheel -->
+  <circle cx="200" cy="390" r="70" fill="none" stroke="#0d0d0d" stroke-width="3"/>
+  <circle cx="200" cy="390" r="10" fill="#0d0d0d"/>
+  <text x="200" y="490" text-anchor="middle" fill="#555" font-size="10">Front wheel</text>
+
+  <!-- Frame (simplified) -->
+  <!-- Seat tube -->
+  <line x1="580" y1="320" x2="600" y2="395" stroke="#0d0d0d" stroke-width="4"/>
+  <!-- Top tube -->
+  <line x1="580" y1="320" x2="490" y2="330" stroke="#0d0d0d" stroke-width="4"/>
+  <!-- Down tube -->
+  <line x1="490" y1="330" x2="600" y2="395" stroke="#0d0d0d" stroke-width="4"/>
+  <!-- Chain stay -->
+  <line x1="600" y1="395" x2="680" y2="390" stroke="#0d0d0d" stroke-width="4"/>
+  <!-- Seat stay -->
+  <line x1="580" y1="320" x2="680" y2="390" stroke="#0d0d0d" stroke-width="3"/>
+
+  <!-- Fork (head tube to front axle) -->
+  <line x1="490" y1="330" x2="200" y2="390" stroke="#0d0d0d" stroke-width="3"/>
+
+  <!-- Cargo area (long tube from head tube forward) -->
+  <rect x="80" y="290" width="420" height="16" rx="4" fill="#0d0d0d"/>
+  <!-- Cargo deck -->
+  <rect x="100" y="305" width="380" height="10" fill="#888"/>
+
+  <!-- Handlebars -->
+  <line x1="490" y1="280" x2="490" y2="330" stroke="#0d0d0d" stroke-width="4"/>
+  <line x1="465" y1="280" x2="515" y2="280" stroke="#0d0d0d" stroke-width="3"/>
+
+  <!-- Saddle -->
+  <line x1="575" y1="260" x2="575" y2="320" stroke="#0d0d0d" stroke-width="4"/>
+  <line x1="555" y1="260" x2="600" y2="260" stroke="#0d0d0d" stroke-width="3"/>
+
+  <!-- ===== Dimension annotations ===== -->
+
+  <!-- Cargo rail length: 824 mm -->
+  <line x1="100" y1="260" x2="480" y2="260" stroke="#e63c2f" stroke-width="1"/>
+  <line x1="100" y1="255" x2="100" y2="265" stroke="#e63c2f" stroke-width="1"/>
+  <line x1="480" y1="255" x2="480" y2="265" stroke="#e63c2f" stroke-width="1"/>
+  <text x="290" y="256" text-anchor="middle" fill="#e63c2f" font-size="11">Cargo rail 824 mm</text>
+
+  <!-- Cargo deck length: 710 mm -->
+  <line x1="100" y1="340" x2="480" y2="340" stroke="#1565c0" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="290" y="356" text-anchor="middle" fill="#1565c0" font-size="10">Cargo deck 710 mm</text>
+
+  <!-- Seat tube length: 539 mm -->
+  <line x1="620" y1="260" x2="620" y2="395" stroke="#2a9d2a" stroke-width="1"/>
+  <line x1="615" y1="260" x2="625" y2="260" stroke="#2a9d2a" stroke-width="1"/>
+  <line x1="615" y1="395" x2="625" y2="395" stroke="#2a9d2a" stroke-width="1"/>
+  <text x="640" y="332" fill="#2a9d2a" font-size="10">ST 539 mm</text>
+
+  <!-- Cargo height: 466 mm -->
+  <line x1="70" y1="295" x2="70" y2="430" stroke="#888" stroke-width="1"/>
+  <line x1="65" y1="295" x2="75" y2="295" stroke="#888" stroke-width="1"/>
+  <line x1="65" y1="430" x2="75" y2="430" stroke="#888" stroke-width="1"/>
+  <text x="30" y="368" fill="#888" font-size="10" transform="rotate(-90,30,368)">466 mm</text>
+
+  <!-- Head tube angle: 73.5° -->
+  <text x="455" y="380" fill="#9c27b0" font-size="10">HTA 73.5°</text>
+
+  <!-- Title -->
+  <text x="450" y="30" text-anchor="middle" fill="#0d0d0d" font-size="16" font-weight="700">Bullitt Cargo Bike — Side Elevation (indicative)</text>
+  <text x="450" y="48" text-anchor="middle" fill="#888" font-size="10">Dimensions from official Larry vs Harry technical drawings. Not to scale.</text>
+</svg>

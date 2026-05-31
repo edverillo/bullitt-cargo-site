@@ -1,0 +1,13 @@
+component,dimension,value,unit,source,confirmed
+Frame,Head tube angle,73.5,deg,official drawing,true
+Frame,Seat tube angle,86,deg,official drawing,true
+Frame,Seat tube length,539,mm,official drawing,true
+Frame,Top tube (effective),607,mm,official drawing,true
+Cargo,Cargo rail length,824,mm,official drawing,true
+Cargo,Cargo deck length,710,mm,official drawing,true
+Cargo,Cargo height (deck to rail top),466,mm,official drawing,true
+Handlebar,Handlebar width,590,mm,official drawing,true
+Brakes,Rear disc diameter,160,mm,official drawing,true
+Frame,Wheelbase,?,mm,unconfirmed,false
+Frame,Chainstay length,?,mm,unconfirmed,false
+Cargo,Cargo inner length,?,mm,unconfirmed,false

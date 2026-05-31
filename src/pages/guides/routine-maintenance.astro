@@ -1,0 +1,60 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base title="Routine Maintenance Checklist">
+  <style>
+    article { max-width: 72ch; }
+    h1 { margin-bottom: 0.5rem; }
+    .meta { color: #888; font-size: 0.85rem; margin-bottom: 2rem; }
+    .tag { display: inline-block; font-size: 0.7rem; padding: 1px 7px; border: 1px solid #ccc; border-radius: 2px; margin-right: 4px; }
+    h2 { margin: 2rem 0 0.75rem; font-size: 1.1rem; }
+    ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+    li { margin-bottom: 0.4rem; line-height: 1.55; font-size: 0.9rem; }
+    .tools-box { background: #f5f5f5; border: 1px solid #ddd; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+    .tools-box h3 { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+    .safety-note { background: #fff3e0; border-left: 3px solid #f0a000; padding: 0.75rem 1rem; font-size: 0.85rem; margin: 1.5rem 0; }
+    a.back { font-size: 0.8rem; display: inline-block; margin-bottom: 1.5rem; }
+  </style>
+  <article>
+    <a href="/guides" class="back">← All guides</a>
+    <h1>Routine Maintenance Checklist</h1>
+    <p class="meta"><span class="tag">maintenance</span><span class="tag">beginner</span></p>
+
+    <p>Keep your Bullitt running reliably with these monthly and seasonal checks. Most tasks require only basic tools and 30–60 minutes.</p>
+
+    <div class="tools-box">
+      <h3>Tools needed</h3>
+      <ul>
+        <li>Allen key set (4 mm, 5 mm, 6 mm)</li>
+        <li>Torque wrench (optional but recommended for stem/headset)</li>
+        <li>Chain cleaning tool or brush</li>
+        <li>Chain lube (wet or dry depending on conditions)</li>
+        <li>Clean rags</li>
+        <li>Isopropyl alcohol (for brake rotor cleaning)</li>
+      </ul>
+    </div>
+
+    <h2>Monthly checks</h2>
+    <ol>
+      <li><strong>Tyres:</strong> Check pressure (typically 4–6 bar for 50 mm tyres). Inspect for cuts, embedded debris, or wear indicators.</li>
+      <li><strong>Brakes:</strong> Squeeze levers — ensure firm, consistent feel. Check pad wear (min 1 mm of pad material). Clean rotors with IPA if contaminated.</li>
+      <li><strong>Chain:</strong> Check wear with a chain wear tool (&gt; 0.5% = replace soon). Lubricate and wipe off excess.</li>
+      <li><strong>Headset:</strong> Grab the front wheel, hold the brake, and rock the bike. Any clunk = headset needs adjustment.</li>
+      <li><strong>Bolts:</strong> Check stem bolts (4–6 Nm), handlebar clamp, seat clamp, and cargo rail bolts. Tighten if loose.</li>
+      <li><strong>Lights:</strong> Test front and rear lights if fitted. Check battery charge on dynamo hub lights.</li>
+    </ol>
+
+    <h2>Seasonal (every 3–6 months)</h2>
+    <ol>
+      <li><strong>Full drivetrain clean:</strong> Remove chain, degrease cassette and chainring, re-lube chain.</li>
+      <li><strong>Cable tension:</strong> Adjust brake and gear cable tension. Check for fraying at cable ends.</li>
+      <li><strong>Wheel true:</strong> Spin each wheel and check for lateral wobble. Minor truing can be done with a spoke key.</li>
+      <li><strong>Bottom bracket:</strong> Spin the cranks — any grinding or play indicates a worn BB. Common service interval is 2–3 years.</li>
+      <li><strong>Cargo deck inspection:</strong> Check for cracks, delamination (wood decks), or rust on metal hardware. Treat wood decks with linseed oil annually.</li>
+    </ol>
+
+    <div class="safety-note">
+      <strong>Safety:</strong> Always test brakes at low speed after any brake work before riding at full speed with cargo or passengers.
+    </div>
+  </article>
+</Base>
