@@ -92,11 +92,24 @@ import Base from '../layouts/Base.astro';
     </div>
   </div>
 
-  <!-- three.js r165 + GLTFLoader via CDN -->
+  <!-- three.js via CDN with importmap — BASE_URL passed via meta tag -->
+  <meta name="glb-base" content={import.meta.env.BASE_URL} />
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"
+    }
+  }
+  </script>
+  <div id="err-debug" style="display:none;color:red;font-size:0.8rem;margin-top:0.5rem"></div>
   <script type="module">
-    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js';
-    import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/controls/OrbitControls.js';
-    import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/loaders/GLTFLoader.js';
+    const meta = document.querySelector('meta[name="glb-base"]');
+    const GLB_PATH = (meta?.content || '/') + 'assets/3d/bullitt-cargo.glb';
+
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
     const SLOTS = ['Frame', 'CargoDeck', 'Accents'];
     const PRESETS = {
@@ -106,9 +119,10 @@ import Base from '../layouts/Base.astro';
     };
     const DEFAULTS = { Frame: '#1a1a2e', CargoDeck: '#c8a96e', Accents: '#e63c2f' };
     const CAMERAS = {
-      side: { x: 0, y: 0.8, z: 3.5 },
-      'three-quarter': { x: 2.2, y: 1.2, z: 2.8 },
-      top: { x: 0, y: 4, z: 0.5 },
+      // Camera distances adjusted for the larger 2.43m model
+      side: { x: 0, y: 0.7, z: 4.0 },
+      'three-quarter': { x: 2.5, y: 1.2, z: 3.2 },
+      top: { x: 0, y: 4.5, z: 0.5 },
     };
 
     // --- read URL params ---
@@ -164,9 +178,6 @@ import Base from '../layouts/Base.astro';
     // --- material map ---
     const meshMap = {};
 
-    // --- load GLB (procedurally generated, served from /assets/3d/) ---
-    const loader = new GLTFLoader();
-
     function applyColor(slot, hex) {
       if (!meshMap[slot]) return;
       const color = new THREE.Color(hex);
@@ -175,7 +186,9 @@ import Base from '../layouts/Base.astro';
       });
     }
 
-    loader.load('/assets/3d/bullitt-cargo.glb', gltf => {
+    // --- load GLB (path fixed for BASE_URL) ---
+    const loader = new GLTFLoader();
+    loader.load(GLB_PATH, gltf => {
       document.getElementById('loading-msg').style.display = 'none';
       gltf.scene.traverse(obj => {
         if (obj.isMesh) {
@@ -185,10 +198,9 @@ import Base from '../layouts/Base.astro';
         }
       });
       scene.add(gltf.scene);
-      // apply initial state
       SLOTS.forEach(s => applyColor(s, state[s]));
     }, undefined, err => {
-      document.getElementById('loading-msg').textContent = 'Model file not found. Place bullitt-cargo.glb in /public/assets/3d/';
+      document.getElementById('loading-msg').textContent = 'Could not load 3D model (' + err + ')';
     });
 
     // --- render loop ---

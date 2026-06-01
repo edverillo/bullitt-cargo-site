@@ -23,9 +23,7 @@ import gallery from '../data/gallery.json';
   <div class="gallery-grid">
     {gallery.map(img => (
       <article class="gallery-item">
-        <div class="img-placeholder" role="img" aria-label={img.alt}>
-          {img.alt}
-        </div>
+        <img src={img.image_url} alt={img.alt} class="gallery-img" loading="lazy" />
         <div class="gallery-caption">
           <p><strong>{img.title}</strong></p>
           <p class="attribution">Photo: {img.photographer}</p>
