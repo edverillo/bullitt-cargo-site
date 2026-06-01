@@ -26,6 +26,7 @@ jobs:
       - run: npm ci
       - run: pip install numpy && python3 generate_model.py
       - run: npm run build
+      - run: npm run check-links
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

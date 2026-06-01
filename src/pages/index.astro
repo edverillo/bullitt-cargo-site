@@ -21,9 +21,9 @@ import Base from '../layouts/Base.astro';
     <h1>The <span>Bullitt</span><br>cargo bike, documented.</h1>
     <p class="subtitle">Open measurements, 3D model, gallery, and maintenance guides — all in one place.</p>
     <div class="cta-row">
-      <a href="/customiser" class="btn primary">Open 3D Customiser</a>
-      <a href="/measurements" class="btn">View Measurements</a>
-      <a href="/downloads" class="btn">Downloads</a>
+      <a href={`${import.meta.env.BASE_URL}customiser`} class="btn primary">Open 3D Customiser</a>
+      <a href={`${import.meta.env.BASE_URL}measurements`} class="btn">View Measurements</a>
+      <a href={`${import.meta.env.BASE_URL}downloads`} class="btn">Downloads</a>
     </div>
   </section>
 
@@ -32,32 +32,32 @@ import Base from '../layouts/Base.astro';
     <div class="card">
       <h3>Measurements</h3>
       <p>50+ confirmed dimensions from official technical drawings. Includes geometry table and CSV download.</p>
-      <a href="/measurements">View table →</a>
+      <a href={`${import.meta.env.BASE_URL}measurements`}>View table →</a>
     </div>
     <div class="card">
       <h3>Model Variants</h3>
       <p>Original, Shorty, Classic-E, Black Edition — specs and differences side by side.</p>
-      <a href="/models">Compare models →</a>
+      <a href={`${import.meta.env.BASE_URL}models`}>Compare models →</a>
     </div>
     <div class="card">
       <h3>3D Customiser</h3>
       <p>Interactive viewer. Change frame, deck, and accent colours. Share your config via URL.</p>
-      <a href="/customiser">Customise →</a>
+      <a href={`${import.meta.env.BASE_URL}customiser`}>Customise →</a>
     </div>
     <div class="card">
       <h3>Gallery</h3>
       <p>CC-licensed photos of Bullitt bikes in the wild — with attribution and alt text.</p>
-      <a href="/gallery">Browse gallery →</a>
+      <a href={`${import.meta.env.BASE_URL}gallery`}>Browse gallery →</a>
     </div>
     <div class="card">
       <h3>Guides</h3>
       <p>Maintenance checklists, upgrade walkthroughs, and cargo attachment safety guides.</p>
-      <a href="/guides">Read guides →</a>
+      <a href={`${import.meta.env.BASE_URL}guides`}>Read guides →</a>
     </div>
     <div class="card">
       <h3>Downloads</h3>
       <p>Dimensioned drawings in SVG and PDF, measurements CSV, and 3D model files.</p>
-      <a href="/downloads">Downloads →</a>
+      <a href={`${import.meta.env.BASE_URL}downloads`}>Downloads →</a>
     </div>
   </div>
 </Base>

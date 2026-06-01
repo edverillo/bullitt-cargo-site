@@ -27,8 +27,8 @@ const components = [...new Set(measurements.map(m => m.component))];
   <p class="subtitle">Dimensions from official Larry vs Harry technical drawings. Unconfirmed values are marked.</p>
 
   <div class="dl-row">
-    <a href="/downloads/measurements.csv" class="btn" download>Download CSV</a>
-    <a href="/downloads/bullitt-side-view.svg" class="btn" download>Side View Drawing (SVG)</a>
+    <a href={`${import.meta.env.BASE_URL}downloads/measurements.csv`} class="btn" download>Download CSV</a>
+    <a href={`${import.meta.env.BASE_URL}downloads/bullitt-side-view.svg`} class="btn" download>Side View Drawing (SVG)</a>
   </div>
 
   <div class="note">
