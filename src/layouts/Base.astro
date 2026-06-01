@@ -4,6 +4,7 @@ interface Props {
   description?: string;
 }
 const { title, description = 'Bullitt cargo bike — measurements, 3D customiser, gallery, and guides.' } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 <!doctype html>
 <html lang="en">
@@ -69,18 +70,18 @@ const { title, description = 'Bullitt cargo bike — measurements, 3D customiser
   </head>
   <body>
     <header class="site-header">
-      <a href="/" class="wordmark" aria-label="Bullitt Cargo Bike home">Bullitt</a>
+      <a href={`${base}/`} class="wordmark" aria-label="Bullitt Cargo Bike home">Bullitt</a>
       <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
       <nav aria-label="Main navigation">
         <ul>
-          <li><a href="/" aria-current={Astro.url.pathname === '/' ? 'page' : undefined}>Home</a></li>
-          <li><a href="/measurements" aria-current={Astro.url.pathname.startsWith('/measurements') ? 'page' : undefined}>Measurements</a></li>
-          <li><a href="/models" aria-current={Astro.url.pathname.startsWith('/models') ? 'page' : undefined}>Models</a></li>
-          <li><a href="/customiser" aria-current={Astro.url.pathname.startsWith('/customiser') ? 'page' : undefined}>3D Customiser</a></li>
-          <li><a href="/gallery" aria-current={Astro.url.pathname.startsWith('/gallery') ? 'page' : undefined}>Gallery</a></li>
-          <li><a href="/guides" aria-current={Astro.url.pathname.startsWith('/guides') ? 'page' : undefined}>Guides</a></li>
+          <li><a href={`${base}/`} aria-current={Astro.url.pathname === `${base}/` || Astro.url.pathname === '/' ? 'page' : undefined}>Home</a></li>
+          <li><a href={`${base}/measurements`} aria-current={Astro.url.pathname.startsWith(`${base}/measurements`) ? 'page' : undefined}>Measurements</a></li>
+          <li><a href={`${base}/models`} aria-current={Astro.url.pathname.startsWith(`${base}/models`) ? 'page' : undefined}>Models</a></li>
+          <li><a href={`${base}/customiser`} aria-current={Astro.url.pathname.startsWith(`${base}/customiser`) ? 'page' : undefined}>3D Customiser</a></li>
+          <li><a href={`${base}/gallery`} aria-current={Astro.url.pathname.startsWith(`${base}/gallery`) ? 'page' : undefined}>Gallery</a></li>
+          <li><a href={`${base}/guides`} aria-current={Astro.url.pathname.startsWith(`${base}/guides`) ? 'page' : undefined}>Guides</a></li>
         </ul>
       </nav>
     </header>

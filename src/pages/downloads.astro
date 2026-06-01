@@ -20,28 +20,28 @@ import Base from '../layouts/Base.astro';
         <h3>Measurements — CSV</h3>
         <p><span class="badge">CSV</span> 50+ confirmed dimensions. Import into any spreadsheet or CAD tool.</p>
       </div>
-      <a href="/downloads/measurements.csv" class="btn" download>Download</a>
+      <a href={`${import.meta.env.BASE_URL}downloads/measurements.csv`} class="btn" download>Download</a>
     </div>
     <div class="dl-item">
       <div>
         <h3>Side View Drawing</h3>
         <p><span class="badge">SVG</span> Dimensioned side elevation from official technical drawings.</p>
       </div>
-      <a href="/downloads/bullitt-side-view.svg" class="btn" download>Download</a>
+      <a href={`${import.meta.env.BASE_URL}downloads/bullitt-side-view.svg`} class="btn" download>Download</a>
     </div>
     <div class="dl-item">
       <div>
         <h3>Gallery Metadata</h3>
         <p><span class="badge">JSON</span> 12 CC-licensed images with full attribution, alt text, and source URLs.</p>
       </div>
-      <a href="/downloads/gallery-metadata.json" class="btn" download>Download</a>
+      <a href={`${import.meta.env.BASE_URL}downloads/gallery-metadata.json`} class="btn" download>Download</a>
     </div>
     <div class="dl-item">
       <div>
         <h3>3D Model — GLB</h3>
         <p><span class="badge">GLB</span> 63 KB procedural model with 3 material slots (Frame, CargoDeck, Accents).</p>
       </div>
-      <a href="/assets/3d/bullitt-cargo.glb" class="btn" download>Download</a>
+      <a href={`${import.meta.env.BASE_URL}assets/3d/bullitt-cargo.glb`} class="btn" download>Download</a>
     </div>
   </div>
 </Base>
